@@ -5,16 +5,29 @@ def get_minion_id(i):
     primenumbers = ""
     minion_id = ""
     lower = 0
-    upper = 1000
-    for num in range(lower, upper + 5):
-        if num > 1:
-            for j in range(2,num):
-                if (num%j) == 0:
-                    break
-            else:
-                primenumbers = primenumbers + str(num)
-              
-    minion_id = primenumbers[i:i+5]
+    upper = 21000 # accumulates 10375 digits > 10000 minions
+    
+    # Sieve of Eratosthenes Method
+    # boolean array with all elements set to True
+    prime = [True for element in range(upper+1)] 
+    p=2 # first prime number
+    
+    # count up increments of p until reaching upper
+    while p*p <=upper:
+        if (prime[p] == True):
+            # mark number with False if not prime
+            for num in range(p*p, upper+1, p):
+                prime[num] = False
+        p+=1
+    
+    # iterate over all numbers from 2 to upper
+    # and if prime == True, accumulate string
+    for j in range(2,upper):
+        if prime[j]:
+            primenumbers = primenumbers + str(j)
+    
+    end = i+5         
+    minion_id = primenumbers[i:end]
     return minion_id
 
 
