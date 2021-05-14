@@ -28,7 +28,10 @@ def reverseWords(wordstring: str):
 
 
 def __reverse(words: list):
-    return words
+    newWords = []
+    for word in words:
+        newWords.insert(0, word)
+    return newWords
 
 
 def main(wordstring: str):
