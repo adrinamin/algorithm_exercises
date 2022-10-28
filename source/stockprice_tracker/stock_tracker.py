@@ -9,7 +9,7 @@ class StockPrice:
     price = 0
 
 def index():
-    with open('stockprice_tracker/stocktracker.json', 'r') as f:
+    with open('./source/stockprice_tracker/stocktracker.json', 'r') as f:
         data = f.read()
         return json.loads(data)
 
@@ -21,18 +21,18 @@ def add(symbol: str, price: float):
     stockprice.price = price
     stockprice.timestamp = datetime.datetime.now().timestamp()
     datapoints = []
-    with open('stockprice_tracker/stocktracker.json', 'r') as f:
+    with open('./source/stockprice_tracker/stocktracker.json', 'r') as f:
         data = f.read()
         datapoints = json.loads(data)
         datapoints.append(json.dumps(stockprice.__dict__))
-    with open('stockprice_tracker/stocktracker.json', 'w') as f:
+    with open('./source/stockprice_tracker/stocktracker.json', 'w') as f:
         f.write(json.dumps(datapoints, indent=4))
 
 
 def update(symbol: str, price: float):
     datapoints = []
     stockprices = []
-    with open('stockprice_tracker/stocktracker.json', 'r') as f:
+    with open('./source/stockprice_tracker/stocktracker.json', 'r') as f:
         data = f.read()
         datapoints = json.loads(data)
     for datapoint in datapoints:           
@@ -44,20 +44,20 @@ def update(symbol: str, price: float):
     new_datapoints = []
     for sp in stockprices:
         new_datapoints.append(json.dumps(sp.__dict__))
-    with open('stockprice_tracker/stocktracker.json', 'w') as f:
+    with open('./source/stockprice_tracker/stocktracker.json', 'w') as f:
         f.write(json.dumps(new_datapoints, indent=4))
             
 def remove(symbol: str):
     datapoints = []
     stockprices = []
-    with open('stockprice_tracker/stocktracker.json', 'r') as f:
+    with open('./source/stockprice_tracker/stocktracker.json', 'r') as f:
         data = f.read()
         datapoints = json.loads(data)
     for i, datapoint in enumerate(datapoints):
         if symbol in datapoint:
             datapoints.pop(i)
             break
-    with open('stockprice_tracker/stocktracker.json', 'w') as f:
+    with open('./source/stockprice_tracker/stocktracker.json', 'w') as f:
         f.write(json.dumps(datapoints, indent=4))
 
 

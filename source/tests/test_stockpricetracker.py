@@ -11,14 +11,14 @@ class StockPriceTrackerTest(unittest.TestCase):
 
     def setUp(self):
         datapoints = []
-        with open('stockprice_tracker/stocktracker.json', 'w') as f:
+        with open('./source/stockprice_tracker/stocktracker.json', 'w') as f:
             f.write(json.dumps(datapoints, indent=2))
             
     
     @classmethod
     def tearDownClass(cls):
         datapoints = []
-        with open('stockprice_tracker/stocktracker.json', 'w') as f:
+        with open('./source/stockprice_tracker/stocktracker.json', 'w') as f:
             f.write(json.dumps(datapoints, indent=2))
 
 
@@ -30,7 +30,7 @@ class StockPriceTrackerTest(unittest.TestCase):
     def test_add_stockprice_adds_new_stockprice_object(self):
         add("MSFT",200)
         datapoints = []
-        with open('stockprice_tracker/stocktracker.json', 'r') as f:
+        with open('./source/stockprice_tracker/stocktracker.json', 'r') as f:
             data = f.read()
             datapoints = json.loads(data)
         self.assertEqual(len(datapoints), 1)
@@ -41,7 +41,7 @@ class StockPriceTrackerTest(unittest.TestCase):
         stockprices = []
         add("TSLA", 1000)
         update("TSLA", 2000)
-        with open('stockprice_tracker/stocktracker.json', 'r') as f:
+        with open('./source/stockprice_tracker/stocktracker.json', 'r') as f:
             data = f.read()
             datapoints = json.loads(data)
         for datapoint in datapoints:           
@@ -53,7 +53,7 @@ class StockPriceTrackerTest(unittest.TestCase):
         add("TSLA", 1000)
         remove("TSLA")
         datapoints = []
-        with open('stockprice_tracker/stocktracker.json', 'r') as f:
+        with open('./source/stockprice_tracker/stocktracker.json', 'r') as f:
             data = f.read()
             datapoints = json.loads(data)
         self.assertEqual(len(datapoints), 0)
